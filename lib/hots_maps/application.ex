@@ -10,6 +10,7 @@ defmodule HotsMaps.Application do
     children = [
       # Start the endpoint when the application starts
       supervisor(HotsMapsWeb.Endpoint, []),
+      supervisor(MapsCache.Supervisor, [])
       # Start your own worker by calling: HotsMaps.Worker.start_link(arg1, arg2, arg3)
       # worker(HotsMaps.Worker, [arg1, arg2, arg3]),
     ]
