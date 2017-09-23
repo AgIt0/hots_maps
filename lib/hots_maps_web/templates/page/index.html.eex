@@ -1,36 +1,45 @@
-<div class="jumbotron">
-  <h2><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h2>
-  <p class="lead">A productive web framework that<br />does not compromise speed and maintainability.</p>
-</div>
+<nav class="col-lg-2 d-none d-sm-block bg-light sidebar">
+  <ul class="nav nav-pills flex-column">
+    <%= for {map, _} <- maps() do %>
+      <li class="nav-item">
+        <a class="nav-link map-link" href="#" data-map="<%= map %>">
+          <%= map %>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+</nav>
 
-<div class="row marketing">
-  <div class="col-lg-6">
-    <h4>Resources</h4>
-    <ul>
-      <li>
-        <a href="http://phoenixframework.org/docs/overview">Guides</a>
-      </li>
-      <li>
-        <a href="https://hexdocs.pm/phoenix">Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
-      </li>
-    </ul>
-  </div>
-
-  <div class="col-lg-6">
-    <h4>Help</h4>
-    <ul>
-      <li>
-        <a href="http://groups.google.com/group/phoenix-talk">Mailing list</a>
-      </li>
-      <li>
-        <a href="http://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on freenode IRC</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">@elixirphoenix</a>
-      </li>
-    </ul>
-  </div>
+<div class="col-lg-10">
+    <%= for {map, heroes} <- maps() do %>
+      <div class="offset-1 col-lg-8 map" data-map="<%= map %>" style="display: none">
+        <p class="text-center"> <%= map %></p>
+        <div class="row">
+          <div class="col-lg-4">
+            <p>Strong Heroes</p>
+            <%= for hero <- heroes |> Map.get(:strong_heroes) do %>
+              <div class="row">
+                <%= hero %>
+              </div>
+            <% end %>
+          </div>
+          <div class="col-lg-4">
+            <p>Average Heroes</p>
+            <%= for hero <- heroes |> Map.get(:average_heroes) do %>
+              <div class="row">
+                <%= hero %>
+              </div>
+            <% end %>
+          </div>
+          <div class="col-lg-4">
+            <p>Weak Heroes</p>
+            <%= for hero <- heroes |> Map.get(:weak_heroes, []) do %>
+              <div class="row">
+                <%= hero %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
 </div>
